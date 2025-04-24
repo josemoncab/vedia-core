@@ -66,12 +66,15 @@ tasks {
 
     compileJava.get().dependsOn(clean)
 
+
+    // Dev task
     register<Copy>("copyToFolder") {
         group = "build"
 
         from("build/libs")
         include("vedia-core*.jar")
         into("D:\\JavaLibs")
+        rename("vedia-core-[0-9]+\\.[0-9]+\\.[0-9]+\\.jar", "vedia-core.jar")
 
         dependsOn(build.get())
     }

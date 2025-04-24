@@ -2,6 +2,7 @@ package com.vediastudios.vediacore.configuration;
 
 import com.vediastudios.vediacore.VediaPlugin;
 import com.vediastudios.vediacore.annotations.*;
+import com.vediastudios.vediacore.logger.Log;
 import com.vediastudios.vediacore.utils.ReflectionUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -21,6 +22,7 @@ public final class FilesManager {
     private HashMap<String, YamlConfiguration> configs = new HashMap<>();
 
     public void init() {
+        Log.info("Start loading files...");
         long start = System.currentTimeMillis();
 
         if (!VediaPlugin.getInstance().getDataFolder().exists()) {
@@ -30,7 +32,7 @@ public final class FilesManager {
         valuesHolders = ReflectionUtils.getClasses();
 
         this.load();
-        System.out.println("Time took to load files: " + (System.currentTimeMillis() - start) + "ms");
+        Log.info("Time took to load files: " + (System.currentTimeMillis() - start) + "ms");
     }
 
     public void reload() {
