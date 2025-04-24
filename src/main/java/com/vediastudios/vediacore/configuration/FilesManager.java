@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Manager of the configuration system
+ */
 public final class FilesManager {
 
     private List<Class<?>> valuesHolders;
@@ -84,6 +87,7 @@ public final class FilesManager {
     }
 
     private void loadLang(Class<?> clazz) {
+        // TODO: Search for the file in the jar and fallback to en_us if not found
         String fileName = clazz.getAnnotation(LanguageHolder.class).value();
 
         if (fileName != configs.get("settings.yml").getString("Lang")) {
@@ -106,6 +110,7 @@ public final class FilesManager {
 
     private void generateFile(File file, Class<?> clazz) {
         YamlConfiguration config = new YamlConfiguration();
+
         this.classToConfig(config, clazz, "");
         try {
             config.save(file);
