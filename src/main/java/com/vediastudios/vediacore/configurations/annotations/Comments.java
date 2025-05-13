@@ -1,4 +1,4 @@
-package com.vediastudios.vediacore.annotations;
+package com.vediastudios.vediacore.configurations.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,10 +11,12 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE})
-public @interface ConfigComment {
+public @interface Comments {
 
     /**
      * Accepts a single string or a list where each string will be put in a new line
+     *
+     * @return Comments of the field
      */
     String[] value();
 }

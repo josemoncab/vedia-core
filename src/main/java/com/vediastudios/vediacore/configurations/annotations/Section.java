@@ -1,4 +1,4 @@
-package com.vediastudios.vediacore.annotations;
+package com.vediastudios.vediacore.configurations.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ConfigSection {
+public @interface Section {
 
     /**
      * Path of the section inside a file

@@ -1,6 +1,6 @@
 package com.vediastudios.vediacore;
 
-import com.vediastudios.vediacore.configuration.FilesManager;
+import com.vediastudios.vediacore.configurations.FilesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.Objects;
 public abstract class VediaPlugin extends JavaPlugin {
     private static VediaPlugin instance;
 
-    private FilesManager fm;
+    private FilesManager filesManager;
 
     public static VediaPlugin getInstance() {
         if (instance == null) {
@@ -30,27 +30,39 @@ public abstract class VediaPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        fm = new FilesManager();
-        fm.init();
+        filesManager = FilesManager.getInstance();
 
         onPluginStart();
     }
 
     @Override
     public void onDisable() {
-        fm.stop();
+        this.filesManager.stop();
 
         this.onPluginShutdown();
     }
 
+    /**
+     * Run when the plugins load. At this point the paper api is not available
+     */
     protected void onPluginLoad() {
     }
 
+    /**
+     * Run when the plugin is enabling.
+     */
     protected abstract void onPluginStart();
 
+    /**
+     * Run when the plugin unloads
+     */
     protected abstract void onPluginShutdown();
 
     public File getFile() {
         return super.getFile();
+    }
+
+    public FilesManager getFilesManager() {
+        return filesManager;
     }
 }

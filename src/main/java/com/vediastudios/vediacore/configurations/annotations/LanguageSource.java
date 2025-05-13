@@ -1,4 +1,4 @@
-package com.vediastudios.vediacore.annotations;
+package com.vediastudios.vediacore.configurations.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,11 +12,14 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface LanguageHolder {
+public @interface LanguageSource {
 
     /**
      * Language code for the localization. By default, is "en_us" and will fall back
      * to this if the provided code has no file inside the jar
+     *
+     * @return lang value
      */
     String value() default "en_us";
 }
+

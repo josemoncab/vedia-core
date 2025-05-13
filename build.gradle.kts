@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     id("maven-publish")
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
 }
 
 group = "com.vediastudios"
@@ -16,10 +17,19 @@ repositories {
         name = "papermc-repo"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+
+    // Libby (AlessioDP) Repository
+    maven {
+        name = "AlessioDP"
+        url = uri("https://repo.alessiodp.com/releases/")
+    }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("${project.property("minecraft")}-R0.1-SNAPSHOT")
+
+    implementation("net.byteflux:libby-bukkit:${project.property("libby")}")
+    compileOnly("org.snakeyaml:snakeyaml-engine:2.9")
 }
 
 java {

@@ -1,8 +1,6 @@
 package com.vediastudios.vediacore.utils;
 
 import com.vediastudios.vediacore.VediaPlugin;
-import com.vediastudios.vediacore.annotations.ConfigurationHolder;
-import com.vediastudios.vediacore.annotations.LanguageHolder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,8 +11,12 @@ import java.util.jar.JarFile;
 
 public final class ReflectionUtils {
 
+    private static final List<Class<?>> classesCache = new ArrayList<>();
+
     public static List<Class<?>> getClasses() {
-        final List<Class<?>> classes = new ArrayList<>();
+        if (!classesCache.isEmpty()) {
+            return classesCache;
+        }
 
         try (final JarFile jarFile = new JarFile(VediaPlugin.getInstance().getFile())) {
 
@@ -37,8 +39,8 @@ public final class ReflectionUtils {
                     continue;
                 }
 
-                if (!clazz.isAnonymousClass() && (clazz.isAnnotationPresent(ConfigurationHolder.class) || clazz.isAnnotationPresent(LanguageHolder.class))) {
-                    classes.add(clazz);
+                if (!clazz.isAnonymousClass()) {
+                    classesCache.add(clazz);
                 }
             }
 
@@ -46,6 +48,6 @@ public final class ReflectionUtils {
             throw new RuntimeException(e);
         }
 
-        return classes;
+        return classesCache;
     }
 }
